@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
-// Color palette from requirements
-const COLORS = {
-  primary: "#1a73e8",
-  secondary: "#fbbc05",
-  accent: "#34a853"
-};
+// No in-app color palette; all colors/fonts set via retro theme CSS.
 
 const initialBoard = Array(9).fill(null);
 
@@ -33,12 +28,12 @@ function calculateWinner(squares) {
 // PUBLIC_INTERFACE
 function App() {
   /**
-   * Main UI and logic for the Tic Tac Toe App.
+   * Main UI and logic for the Tic Tac Toe App (retro themed).
    * - 2-player local gameplay
    * - Interactive board
    * - Game over & announcement
    * - Game reset
-   * - Responsive, modern UI
+   * - Responsive, retro UI
    */
   const [board, setBoard] = useState(initialBoard);
   const [xIsNext, setXIsNext] = useState(true);
@@ -119,14 +114,6 @@ function App() {
       onKeyDown={e => handleCellKeyDown(e, idx)}
       aria-label={`Cell ${idx + 1}, ${board[idx] ? board[idx] : "empty"}`}
       tabIndex={0}
-      style={{
-        color:
-          board[idx] === "X"
-            ? COLORS.primary
-            : board[idx] === "O"
-            ? COLORS.accent
-            : undefined
-      }}
       disabled={!!board[idx] || gameOver}
     >
       {board[idx]}
@@ -141,18 +128,14 @@ function App() {
         {winner ? (
           <span>
             Winner:
-            <strong
-              style={{
-                color: winner === "X" ? COLORS.primary : COLORS.accent
-              }}
-            >
+            <strong className={winner === "X" ? "score-x" : "score-o"}>
               {" "}
               Player {winner}
             </strong>
             !
           </span>
         ) : (
-          <span style={{ color: COLORS.secondary, fontWeight: 600 }}>
+          <span style={{ fontWeight: 700 }}>
             It&apos;s a tie!
           </span>
         )}
@@ -162,35 +145,30 @@ function App() {
 
   // PUBLIC_INTERFACE
   function Scoreboard() {
+    // Add a retro underline (box-shadow) to show turn
     return (
       <div className="ttt-scoreboard" aria-label="Scoreboard">
         <div
-          className="score score-x"
-          style={{
-            borderBottom:
-              xIsNext && !gameOver
-                ? `3px solid ${COLORS.primary}`
-                : undefined
-          }}
+          className={`score score-x${xIsNext && !gameOver ? " active" : ""}`}
+          style={
+            xIsNext && !gameOver
+              ? { boxShadow: "0 0 2px 2px #fd5cd2, 2px 2px 0 #fff" }
+              : {}
+          }
         >
           Player X
-          <span className="score-value" style={{ color: COLORS.primary }}>
-            {score.X}
-          </span>
+          <span className="score-value">{score.X}</span>
         </div>
         <div
-          className="score score-o"
-          style={{
-            borderBottom:
-              !xIsNext && !gameOver
-                ? `3px solid ${COLORS.accent}`
-                : undefined
-          }}
+          className={`score score-o${!xIsNext && !gameOver ? " active" : ""}`}
+          style={
+            !xIsNext && !gameOver
+              ? { boxShadow: "0 0 2px 2px #a6ff00, 2px 2px 0 #fff" }
+              : {}
+          }
         >
           Player O
-          <span className="score-value" style={{ color: COLORS.accent }}>
-            {score.O}
-          </span>
+          <span className="score-value">{score.O}</span>
         </div>
       </div>
     );
@@ -210,8 +188,8 @@ function App() {
   return (
     <main className="app-wrapper">
       <div className="game-container">
-        <h1 className="ttt-title" style={{ color: COLORS.primary }}>
-          Tic Tac Toe
+        <h1 className="ttt-title">
+          TIC TAC TOE
         </h1>
         <Scoreboard />
         <section className="ttt-board" role="grid" aria-label="Tic Tac Toe Board">
@@ -228,7 +206,9 @@ function App() {
         <span>
           <a
             href="https://react.dev/"
-            style={{ color: COLORS.primary, textDecoration: "underline" }}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: "underline" }}
           >
             React
           </a>{" "}

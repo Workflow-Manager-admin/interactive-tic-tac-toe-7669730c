@@ -1,103 +1,137 @@
+/* ==== RETRO TIC TAC TOE THEME ==== */
+@font-face {
+  font-family: 'PressStart2P';
+  src: url('https://fonts.gstatic.com/s/pressstart2p/v11/e3t4euO8TVk1O9wGw4DYfQ.ttf') format('truetype');
+  font-display: swap;
+}
+
 :root {
-  --color-primary: #1a73e8;
-  --color-secondary: #fbbc05;
-  --color-accent: #34a853;
-  --bg: #fff;
-  --bg-card: #f8f9fa;
-  --cell-bg: #fff;
-  --border: #e0e3e9;
-  --text: #232323;
-  --text-light: #757575;
-  --shadow: 0 6px 18px 0 rgba(51,72,89,0.09);
+  /* Retro 80s color palette (pastel neon on dark) */
+  --retro-bg: #141414;
+  --retro-card: #27272a;
+  --retro-accent: #61dafb;
+  --retro-pink: #fd5cd2;
+  --retro-yellow: #ffec99;
+  --retro-orange: #fd9827;
+  --retro-slider: #a6ff00;
+  --retro-border: #51e5ff;
+  --retro-shadow: 0 0 0 4px #00aaff, 0 8px 36px 0 rgba(0,255,247,0.14);
+  --retro-text: #f8ffba;
+  --retro-text-dark: #161c1c;
+  --retro-disabled: #4f58d3;
 }
 
 body {
-  background: var(--bg);
+  background: repeating-linear-gradient(0deg, #181818 0px, #202428 4px, #141414 8px);
   min-height: 100vh;
+  font-family: 'PressStart2P', 'Courier New', Courier, monospace;
+  color: var(--retro-text);
+  image-rendering: pixelated;
+  margin: 0;
 }
 
 .app-wrapper {
   min-height: 100vh;
-  background: var(--bg);
+  background: none;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-family: inherit;
 }
 
 .game-container {
   margin: 0 auto;
-  background: var(--bg-card);
-  box-shadow: var(--shadow);
-  border-radius: 18px;
-  padding: 2.5rem 2.5rem 2rem 2.5rem;
-  max-width: 384px;
+  background: var(--retro-card);
+  border-radius: 0.5rem;
+  border: 4px solid var(--retro-border);
+  box-shadow: 0 0 0 5px var(--retro-accent), 0 16px 64px 0 rgba(55,255,247,0.11);
+  padding: 2rem 2rem 1.5rem 2rem;
+  max-width: 420px;
   width: 95vw;
   min-width: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3.5rem;
+  margin-top: 3rem;
+  box-sizing: border-box;
 }
 
 .ttt-title {
-  font-size: 2.25rem;
-  letter-spacing: .015em;
-  margin-bottom: 1rem;
-  font-weight: 800;
-  text-align: center;
-  color: var(--color-primary);
-  text-rendering: optimizeLegibility;
+  font-size: 1.3rem;
+  margin-bottom: 1.15rem;
+  color: var(--retro-accent);
+  text-shadow: 2px 2px 0 var(--retro-pink),
+               4px 4px 0 var(--retro-yellow),
+               0 0 4px #fff;
+  letter-spacing: 0.18em;
+  font-family: 'PressStart2P', 'Courier New', Courier, monospace;
+  font-weight: 400;
+  text-rendering: geometricPrecision;
+  border-bottom: 5px double var(--retro-orange);
+  padding-bottom: 0.7rem;
 }
 
 .ttt-scoreboard {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 1.2rem;
-  margin-bottom: 1.4rem;
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
   margin-top: 0.2rem;
   width: 100%;
-  font-weight: 600;
-  font-size: 1.13rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  font-family: 'PressStart2P', 'Courier New', Courier, monospace;
+  color: var(--retro-text);
 }
 
 .score {
   flex: 1;
   text-align: center;
-  padding: 0.5rem 0;
-  letter-spacing: .08em;
-  background: #fff;
-  border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(50,70,109,0.07);
-  transition: border-bottom .25s;
+  padding: 0.7em 0.25em;
+  letter-spacing: 0.07em;
+  background: var(--retro-yellow);
+  border: 2.5px solid var(--retro-border);
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0.12em;
+  font-size: 1em;
+  position: relative;
+  box-shadow: 2px 2px 0 var(--retro-orange);
 }
-.score-x .score-value {
-  color: var(--color-primary);
+.score-x {
+  background: var(--retro-pink);
+  color: var(--retro-text-dark);
+  text-shadow: 1px 1px 0 var(--retro-border);
 }
-.score-o .score-value {
-  color: var(--color-accent);
+.score-o {
+  background: var(--retro-slider);
+  color: #143a00;
+  text-shadow: 1px 1px 0 #c2ff9b;
 }
 .score-value {
-  margin-left: 0.35em;
-  font-size: 1.2em;
+  margin-top: 0.14em;
+  font-size: 1em;
   font-weight: 700;
+  filter: drop-shadow(0 2px 2px var(--retro-border));
 }
 
 .ttt-board {
   display: grid;
-  grid-template-columns: repeat(3, minmax(60px, 1fr));
-  grid-template-rows: repeat(3, minmax(60px, 1fr));
+  grid-template-columns: repeat(3, minmax(72px, 1fr));
+  grid-template-rows: repeat(3, minmax(72px, 1fr));
   gap: 9px;
-  margin: 0 auto 1.2rem auto;
+  margin: 0 auto 1.25rem auto;
   width: 100%;
-  max-width: 320px;
-  background: var(--bg-card);
-  border-radius: 12px;
-  border: 2.5px solid var(--border);
-  box-shadow: 0 1px 6px 0 rgba(33,49,77,0.06);
-  padding: 11px;
+  max-width: 328px;
+  background: var(--retro-card);
+  border-radius: 0.8em;
+  border: 5px double var(--retro-border);
+  box-shadow: 0 4px 0 var(--retro-pink);
+  padding: 10px;
 }
 
 .ttt-cell-wrapper {
@@ -109,68 +143,83 @@ body {
 .ttt-cell {
   width: 100%;
   height: 100%;
-  aspect-ratio: 1;
   font-size: 2.1rem;
-  font-family: inherit;
+  font-family: 'PressStart2P', 'Courier New', Courier, monospace;
   font-weight: 800;
-  color: var(--color-primary);
-  background: var(--cell-bg);
-  border-radius: 7px;
-  border: 2px solid var(--border);
-  box-shadow: 0 1px 2px rgba(80,120,170,0.04);
+  color: var(--retro-accent);
+  background: #191630;
+  border-radius: 0.18em;
+  border: 4px solid var(--retro-border);
+  box-shadow: 2px 2px 0 var(--retro-yellow);
   display: flex;
   align-items: center;
   justify-content: center;
   outline: none;
-  transition: background .12s, border-color .15s, box-shadow .19s;
   cursor: pointer;
   user-select: none;
-  will-change: background, border-color;
+  transition: background .14s, border-color .13s, box-shadow .19s;
+  text-shadow: 2px 2px 0 #fff, 4px 4px 0 var(--retro-pink);
+  position: relative;
+  margin: 0;
 }
 
 .ttt-cell:focus {
-  border-color: var(--color-primary);
-  background: #e8f1fb;
+  border-color: var(--retro-orange);
+  background: #26214e;
+  box-shadow: 0 0 0 2px var(--retro-slider);
 }
 
 .ttt-cell:disabled {
-  background: #f1f1f6;
-  color: var(--text-light);
+  background: #544575;
+  color: #d1d9eb;
   cursor: not-allowed;
+  text-shadow: 1.5px 1.5px 0 #333, 2px 2px 2px var(--retro-slider);
 }
 
 .ttt-cell[aria-label*="O"] {
-  color: var(--color-accent);
+  color: var(--retro-slider);
+  text-shadow: 2px 2px 0 var(--retro-border), 2px 2px 4px #fff, 1px 1px 0 #8d8;
+}
+.ttt-cell[aria-label*="X"] {
+  color: var(--retro-pink);
+  text-shadow: 2px 2px 0 var(--retro-yellow), 0 2px 8px #fff;
 }
 
 .ttt-gameover {
-  margin: 1rem 0 0.8rem 0;
+  margin: 1rem 0 0.7rem 0;
   text-align: center;
-  font-size: 1.24rem;
+  font-size: 1.08rem;
   font-weight: 700;
-  letter-spacing: .009em;
-  color: var(--color-secondary);
+  letter-spacing: 0.017em;
+  color: var(--retro-orange);
+  font-family: 'PressStart2P', 'Courier New', Courier, monospace;
+  text-shadow: 1.5px 1.5px 0 var(--retro-pink), 0 2px 8px #fff;
+  border-top: 2px dashed var(--retro-accent);
+  padding-top: 0.9em;
 }
 
 .ttt-btn {
-  background: var(--color-primary);
-  color: #fff;
-  font-size: 1rem;
+  background: var(--retro-border);
+  color: var(--retro-bg);
+  font-family: 'PressStart2P', 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
   font-weight: 700;
-  padding: 10px 26px;
-  border: none;
+  padding: 10px 30px;
+  border: 4px double var(--retro-accent);
   outline: none;
-  border-radius: 7px;
+  border-radius: 0.45em;
   cursor: pointer;
-  margin-top: 0.7rem;
-  box-shadow: 0 1px 4px rgba(26,115,232,0.08);
-  letter-spacing: .09em;
-  transition: background .24s, box-shadow .22s;
+  margin-top: 0.6rem;
+  box-shadow: 2px 2px 0 var(--retro-slider), 0 2px 8px #222d;
+  letter-spacing: .11em;
+  transition: background .19s, box-shadow .13s, color .19s;
+  text-shadow: 1px 1px 0 var(--retro-orange);
+  filter: contrast(120%);
 }
-
 .ttt-btn:hover, .ttt-btn:focus {
-  background: #175fb2;
-  box-shadow: 0 3px 10px rgba(26,115,232,0.11);
+  background: var(--retro-pink);
+  color: #0d1224;
+  box-shadow: 4px 4px 0 var(--retro-border), 0 4px 14px #ffef;
 }
 
 .ttt-controls {
@@ -182,22 +231,37 @@ body {
 }
 
 .ttt-footer {
-  margin-top: 2.8rem;
-  color: var(--text-light);
-  font-size: .99rem;
-  padding-bottom: 1.2rem;
+  margin-top: 2.5rem;
+  color: var(--retro-accent);
+  font-size: 0.84rem;
+  padding-bottom: 1.1rem;
   text-align: center;
+  text-shadow: 1.5px 1.5px 0 #1923, 0 1.5px 8px #fff9;
+}
+
+a, a:visited {
+  color: var(--retro-yellow);
+  text-shadow: 1px 1px 2px var(--retro-border);
 }
 
 @media (max-width: 480px) {
   .game-container {
-    padding: 1.37rem 0.2rem 1rem 0.2rem;
-    max-width: 98vw;
-    margin-top: 1.8rem;
+    padding: 0.67rem 0.1rem 0.6rem 0.1rem;
+    max-width: 99vw;
+    margin-top: 1.1rem;
   }
   .ttt-board {
-    max-width: 98vw;
-    padding: 6px;
-    gap: 6px;
+    max-width: 99vw;
+    padding: 5px;
+    gap: 5px;
+  }
+  .ttt-title {
+    font-size: 1.04rem;
+    padding-bottom: 0.36rem;
+    border-width: 3px;
+  }
+  .score {
+    padding: 0.4em 0.15em;
+    font-size: 0.9em;
   }
 }
